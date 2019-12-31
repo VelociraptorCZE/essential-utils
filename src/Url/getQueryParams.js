@@ -37,7 +37,7 @@ const addParsedQueryToObject = ({ queryParams, queryName, newQueryValue }) => {
 };
 
 const parseSingleQueryEntry = queryParams => queryEntry => {
-    const [queryKey = "", newQueryValue = ""] = queryEntry.split("=");
+    const [queryKey, newQueryValue = ""] = queryEntry.split("=");
 
     if (queryKey === "") return;
 

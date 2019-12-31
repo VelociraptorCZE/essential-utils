@@ -29,5 +29,11 @@ describe("Essential utils test", () => {
             { a: ["5", "6", "7"], b: ["6", "7", "5"], c: ["T", "t", "S"] }
         );
         deepStrictEqual(getQueryParams("a?d"), { d: "" });
+        deepStrictEqual(getQueryParams("a?d[]"), { d: [""] });
+        deepStrictEqual(getQueryParams("?pf=38&pt=44"), { pf: "38", pt: "44" });
+        deepStrictEqual(
+            getQueryParams("?k=1&k=2&j=5&j=4,1&j=52&j=22"),
+            { k: ["1", "2"], j: ["5", "4", "1", "52", "22"] }
+        );
     });
 });

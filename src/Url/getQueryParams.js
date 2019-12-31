@@ -1,6 +1,6 @@
 /**
  * Essential Utils
- * Copyright (c) Simon Raichl 2019
+ * Copyright (c) Simon Raichl 2019 - 2020
  * MIT License
  */
 
@@ -27,12 +27,13 @@ const getParsedQuery = (queryValue, isReturningArray) => {
 
 const addParsedQueryToObject = ({ queryParams, queryName, newQueryValue }) => {
     const currentQueryValue = queryParams[queryName];
+    newQueryValue = getParsedQuery(newQueryValue, IS_RETURNING_ARRAY);
 
-    if (!Array.isArray(currentQueryValue)) {
-        queryParams[queryName] = [currentQueryValue, newQueryValue];
+    if (Array.isArray(currentQueryValue)) {
+        currentQueryValue.push(...newQueryValue);
     }
     else {
-        currentQueryValue.push(...getParsedQuery(newQueryValue, IS_RETURNING_ARRAY));
+        queryParams[queryName] = [currentQueryValue, ...newQueryValue];
     }
 };
 

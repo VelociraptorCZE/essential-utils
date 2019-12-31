@@ -1,0 +1,23 @@
+{
+  "name": "essential-utils",
+  "version": "0.9.0",
+  "license": "MIT",
+  "keywords": [
+    "utils",
+    "toolkit"
+  ],
+  "description": "Random collection of various JavaScript utilities.",
+  "authors": [
+    {
+      "name": "Simon Raichl",
+      "homepage": "https://github.com/velociraptorcze"
+    }
+  ],
+  "devDependencies": {
+    "mocha": "6.2.2",
+    "esm": "3.2.25"
+  },
+  "scripts": {
+    "test": "mocha -r esm test/utils.test.js"
+  }
+}

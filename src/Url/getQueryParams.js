@@ -6,6 +6,8 @@
 
 export const QUERY_IS_NOT_STRING = "Given url isn't valid string.";
 
+const IS_RETURNING_ARRAY = true;
+
 const arrayCheckRegex = /(?=.*)?\[]$/;
 
 const getQueryProps = queryName => ({
@@ -13,40 +15,39 @@ const getQueryProps = queryName => ({
     isQueryArray: arrayCheckRegex.test(queryName)
 });
 
-const addNewQueryToArray = (queryArray, queryValue) => {
-    const isQueryValueArray = /,/.test(queryValue);
+const getParsedQuery = (queryValue, isReturningArray) => {
+    const queryValuesAsArray = queryValue.split(",");
 
-    if (isQueryValueArray) {
-        queryArray.push(...queryValue.split(","));
+    if (isReturningArray === IS_RETURNING_ARRAY) {
+        return queryValuesAsArray;
     }
-    else {
-        queryArray.push(queryValue);
-    }
+
+    return queryValuesAsArray.length > 1 ? queryValuesAsArray : queryValue;
 };
 
-const addParsedQueryToObject = ({ queryParams, queryName, isQueryArray, newQueryValue }) => {
+const addParsedQueryToObject = ({ queryParams, queryName, newQueryValue }) => {
     const currentQueryValue = queryParams[queryName];
 
-    if (!Array.isArray(currentQueryValue) && isQueryArray) {
+    if (!Array.isArray(currentQueryValue)) {
         queryParams[queryName] = [currentQueryValue, newQueryValue];
     }
     else {
-        addNewQueryToArray(currentQueryValue, newQueryValue);
+        currentQueryValue.push(...getParsedQuery(newQueryValue, IS_RETURNING_ARRAY));
     }
 };
 
 const parseSingleQueryEntry = queryParams => queryEntry => {
-    const [queryOriginalKey, newQueryValue] = queryEntry.split("=");
+    const [queryKey = "", newQueryValue = ""] = queryEntry.split("=");
 
-    if (queryOriginalKey === "" || newQueryValue === void 0) return;
+    if (queryKey === "") return;
 
-    const { isQueryArray, queryName } = getQueryProps(queryOriginalKey);
+    const { isQueryArray, queryName } = getQueryProps(queryKey);
 
     if (queryParams.hasOwnProperty(queryName)) {
-        addParsedQueryToObject({ queryParams, queryName, isQueryArray, newQueryValue });
+        addParsedQueryToObject({ queryParams, queryName, newQueryValue });
     }
     else {
-        queryParams[queryName] = isQueryArray ? [newQueryValue] : newQueryValue;
+        queryParams[queryName] = getParsedQuery(newQueryValue, isQueryArray);
     }
 };
 

@@ -4,7 +4,8 @@
  * MIT License
  */
 
-import formDataToObject from "./FormData/formDataToObject";
-import formDataToJson from "./FormData/formDataToJson";
+import formDataToObject from "./src/FormData/formDataToObject";
+import formDataToJson from "./src/FormData/formDataToJson";
+import getQueryParams from "./src/Url/getQueryParams";
 
-export { formDataToObject, formDataToJson };
+export { formDataToObject, formDataToJson, getQueryParams };

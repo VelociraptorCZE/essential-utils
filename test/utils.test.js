@@ -1,9 +1,10 @@
 import { deepStrictEqual, throws } from "assert";
 import { getQueryParams } from "..";
 import { QUERY_IS_NOT_STRING } from "../src/Url/getQueryParams";
+import objectMap, {IN_PLACE} from "../src/Object/objectMap";
 
 describe("Essential utils test", () => {
-    it("getQueryParams test", () => {
+    it("getQueryParams", () => {
         throws(getQueryParams, TypeError, QUERY_IS_NOT_STRING);
         throws(() => getQueryParams(45), TypeError, QUERY_IS_NOT_STRING);
         deepStrictEqual(
@@ -35,5 +36,20 @@ describe("Essential utils test", () => {
             getQueryParams("?k=1&k=2&j=5&j=4,1&j=52&j=22"),
             { k: ["1", "2"], j: ["5", "4", "1", "52", "22"] }
         );
+    });
+
+    it("objectMap", () => {
+        const testObj1 = { a: 1, b: 2, c: 3 };
+
+        deepStrictEqual(
+            objectMap(testObj1, value => value * 2),
+            { a: 2, b: 4, c: 6 }
+        );
+
+        const mappedObj1 = objectMap(testObj1, value => value * 2);
+        const mappedObj2 = objectMap(testObj1, value => value * 2, IN_PLACE);
+
+        deepStrictEqual(mappedObj1 === testObj1, false);
+        deepStrictEqual(mappedObj2 === testObj1, true);
     });
 });

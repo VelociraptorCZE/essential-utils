@@ -25,30 +25,30 @@ const getParsedQuery = (queryValue, isReturningArray) => {
     return queryValuesAsArray.length > 1 ? queryValuesAsArray : queryValue;
 };
 
-const addParsedQueryToObject = ({ queryParams, queryName, newQueryValue }) => {
+const addParsedQueryToObject = ({ queryParams, queryName, queryValue }) => {
     const currentQueryValue = queryParams[queryName];
-    newQueryValue = getParsedQuery(newQueryValue, IS_RETURNING_ARRAY);
+    queryValue = getParsedQuery(queryValue, IS_RETURNING_ARRAY);
 
     if (Array.isArray(currentQueryValue)) {
-        currentQueryValue.push(...newQueryValue);
+        currentQueryValue.push(...queryValue);
     }
     else {
-        queryParams[queryName] = [currentQueryValue, ...newQueryValue];
+        queryParams[queryName] = [currentQueryValue, ...queryValue];
     }
 };
 
 const parseSingleQueryEntry = queryParams => queryEntry => {
-    const [queryKey, newQueryValue = ""] = queryEntry.split("=");
+    const [queryKey, queryValue = ""] = queryEntry.split("=");
 
     if (queryKey === "") return;
 
     const { isQueryArray, queryName } = getQueryProps(queryKey);
 
     if (queryParams.hasOwnProperty(queryName)) {
-        addParsedQueryToObject({ queryParams, queryName, newQueryValue });
+        addParsedQueryToObject({ queryParams, queryName, queryValue });
     }
     else {
-        queryParams[queryName] = getParsedQuery(newQueryValue, isQueryArray);
+        queryParams[queryName] = getParsedQuery(queryValue, isQueryArray);
     }
 };
 

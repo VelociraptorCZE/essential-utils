@@ -4,12 +4,4 @@
  * MIT License
  */
 
-export default iterable => {
-    const object = {};
-
-    iterable.forEach(([key, value]) => {
-        object[key] = value;
-    });
-
-    return object;
-};
+export default iterable => Object.fromEntries(iterable.entries());

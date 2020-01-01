@@ -7,5 +7,6 @@
 import getQueryParams from "./src/Url/getQueryParams";
 import iterableToJson from "./src/Iterable/iterableToJson";
 import iterableToObject from "./src/Iterable/iterableToObject";
+import objectMap from "./src/Object/objectMap";
 
-export { iterableToJson, iterableToObject, getQueryParams };
+export { iterableToJson, iterableToObject, getQueryParams, objectMap };

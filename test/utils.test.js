@@ -1,7 +1,7 @@
 import { deepStrictEqual, throws } from "assert";
-import { getQueryParams } from "..";
-import { QUERY_IS_NOT_STRING } from "../src/Url/getQueryParams";
-import objectMap, {IN_PLACE} from "../src/Object/objectMap";
+import { getQueryParams, objectMap } from "..";
+import { QUERY_IS_NOT_STRING } from "../src/errorMessages";
+import { IN_PLACE } from "../src/flags";
 
 describe("Essential utils test", () => {
     it("getQueryParams", () => {

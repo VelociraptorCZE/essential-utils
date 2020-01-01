@@ -4,7 +4,7 @@
  * MIT License
  */
 
-export const IN_PLACE = true;
+import { IN_PLACE } from "../flags";
 
 export default (object, callback, isInPlace) => {
     if (isInPlace !== IN_PLACE) {

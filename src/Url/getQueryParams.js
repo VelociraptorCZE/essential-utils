@@ -4,9 +4,8 @@
  * MIT License
  */
 
-export const QUERY_IS_NOT_STRING = "Given url isn't valid string.";
-
-const IS_RETURNING_ARRAY = true;
+import { IS_RETURNING_ARRAY } from "../flags";
+import { QUERY_IS_NOT_STRING } from "../errorMessages";
 
 const arrayCheckRegex = /(?=.*)?\[]$/;
 

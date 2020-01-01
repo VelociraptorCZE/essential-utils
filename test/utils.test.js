@@ -1,5 +1,5 @@
 import { deepStrictEqual, throws } from "assert";
-import { getQueryParams, objectMap } from "..";
+import { getQueryParams, iterableToObject, iterableToJson, objectMap } from "..";
 import { QUERY_IS_NOT_STRING } from "../src/errorMessages";
 import { IN_PLACE } from "../src/flags";
 
@@ -51,5 +51,19 @@ describe("Essential utils test", () => {
 
         deepStrictEqual(mappedObj1 === testObj1, false);
         deepStrictEqual(mappedObj2 === testObj1, true);
+    });
+
+    it("iterableToObject", () => {
+       deepStrictEqual(iterableToObject(new Set([1, 3])), { 1: 1, 3: 3 });
+       deepStrictEqual(iterableToObject(
+            new Map([
+                ["a", 1],
+                ["b", 2],
+            ])
+       ), { a: 1, b: 2 });
+    });
+
+    it("iterableToJson", () => {
+        deepStrictEqual(iterableToJson(["a", "b"]), '{"0":"a","1":"b"}');
     });
 });

@@ -18,6 +18,6 @@
     "esm": "3.2.25"
   },
   "scripts": {
-    "test": "mocha -r esm test/utils.test.js"
+    "test": "mocha -r esm test/*.test.js"
   }
 }

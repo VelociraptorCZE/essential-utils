@@ -1,5 +1,5 @@
 import { deepStrictEqual, throws } from "assert";
-import { getQueryParams, iterableToObject, iterableToJson, objectMap } from "..";
+import { getQueryParams, iterableToObject, iterableToJson, objectMap, numberRange } from "..";
 import { QUERY_IS_NOT_STRING } from "../src/errorMessages";
 import { IN_PLACE } from "../src/flags";
 
@@ -65,5 +65,14 @@ describe("Essential utils test", () => {
 
     it("iterableToJson", () => {
         deepStrictEqual(iterableToJson(["a", "b"]), '{"0":"a","1":"b"}');
+    });
+
+    it("numberRange", () => {
+        deepStrictEqual(numberRange(1, 5), [1, 2, 3, 4, 5]);
+        deepStrictEqual(numberRange(1, 5, 2), [1, 3, 5]);
+        deepStrictEqual(numberRange(1, 2, 3), [1]);
+        deepStrictEqual(numberRange(1, 5, 3), [1, 4]);
+        deepStrictEqual(numberRange(2, -4), [2, 1, 0, -1, -2, -3, -4]);
+        deepStrictEqual(numberRange(2, -4, 2), [2, 0, -2, -4]);
     });
 });

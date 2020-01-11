@@ -9,5 +9,15 @@ import iterableToJson from "./src/Iterable/iterableToJson";
 import iterableToObject from "./src/Iterable/iterableToObject";
 import objectMap from "./src/Object/objectMap";
 import numberRange from "./src/Array/numberRange";
+import arraySum from "./src/Array/arraySum";
+import arrayChunk from "./src/Array/arrayChunk";
 
-export { iterableToJson, iterableToObject, getQueryParams, objectMap, numberRange };
+export {
+    iterableToJson,
+    iterableToObject,
+    getQueryParams,
+    objectMap,
+    numberRange,
+    arraySum,
+    arrayChunk
+};

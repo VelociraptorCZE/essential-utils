@@ -38,5 +38,6 @@ describe("getQueryParams test", () => {
             getQueryParams("?k=1&k=2&j=5&j=4,1&j=52&j=22"),
             { k: ["1", "2"], j: ["5", "4", "1", "52", "22"] }
         );
+        deepStrictEqual(getQueryParams("?a[]=5,6&b[]=4"), { a: ["5", "6"], b: ["4"] });
     });
 });

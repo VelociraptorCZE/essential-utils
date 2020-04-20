@@ -28,6 +28,18 @@ import { arraySum } from "essential-utils";
 arraySum([1, 2, 3, 4]); // 10;
 ```
 
+### arrayShuffle()
+
+- Returns provided array with shuffled values.
+
+##### Parameters: array
+
+```js
+import { arrayShuffle } from "essential-utils";
+
+arrayShuffle([1, 2, 3, 4]); // e.g. [2, 1, 4, 3]
+```
+
 ### numberRange()
 
 - Returns range between two values in array.
